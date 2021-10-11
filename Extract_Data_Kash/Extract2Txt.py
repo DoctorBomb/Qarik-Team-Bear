@@ -25,15 +25,17 @@ def check(thresh):
 ## Tesseract OCR pass; INC
 def tesseract_pass(list_of_img_pdfs):
     ''' Runs Tesseract OCR on list of pdfs '''
-    tesseract_parse = []
+    #tesseract_parse = []
     for file in list_of_img_pdfs:
         out = convert_from_path(file,500)
         text = ''    
         for o in out:
             text += str(pytesseract.image_to_string(o))
-        tesseract_parse.append(text)
-    df_tesser = pd.DataFrame(tesseract_parse,columns=[list_of_img_pdfs])
-    return df_tesser
+        file1 = open(os.path.splitext(os.path.basename(f))[0]+".txt","w")
+        file1.writelines(text)
+        file1.close()
+    #df_tesser = pd.DataFrame(tesseract_parse,columns=[list_of_img_pdfs])
+    return
 
 
 ##Convert from txt files to a dataframe; Other information to include possibly?
