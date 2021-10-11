@@ -30,7 +30,7 @@ def tesseract_pass(list_of_img_pdfs):
         out = convert_from_path(file,500)
         text = ''    
         for o in out:
-            text += str(py.tesseract.image_to_string(o))
+            text += str(pytesseract.image_to_string(o))
         tesseract_parse.append(text)
     df_tesser = pd.DataFrame(tesseract_parse,columns=[list_of_img_pdfs])
     return df_tesser
