@@ -3,6 +3,15 @@
 from itertools import *
 import numpy as np
 import pandas as pd
+import string
+import nltk
+from nltk.corpus import stopwords
+from nltk.stem import WordNetLemmatizer
+nltk.download('stopwords')
+nltk.download('wordnet')
+
+#nltk.download()
+
 
 ## Path to text files
 path = "/home/kbari/Documents/Erdos/pdfminer_texts/"
@@ -22,3 +31,16 @@ def txt_to_df(path):
     #print(len(raw_df_lst))
     df_raw = pd.concat(raw_df_lst)
     return df_raw
+
+
+
+## Removes punctuation, stopwords, lemmatizes
+def text_preprocess(text):
+    '''
+    Remove all punctuation,stopwords, lemmatize -> returns list of words
+    '''
+    stemmer = WordNetLemmatizer()
+    nopunc = [char for char in text if char not in string.punctuation]
+    nopunc = ''.join([i for i in nopunc if not i.isdigit()])
+    nopunc =  [word.lower() for word in nopunc.split() if word not in stopwords.words('english')]
+    return [stemmer.lemmatize(word) for word in nopunc]
