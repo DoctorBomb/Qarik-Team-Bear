@@ -21,7 +21,7 @@ def pdfminer_pass():
     #subprocess.call(['sh',path+'pdfmine.sh'])
     return
 
-
+## PyMuPdf Pass
 def pymupdf_pass(path,out_path):
     '''PyMyPdf first pass'''
 	for file in path:
@@ -37,8 +37,6 @@ def pymupdf_one(file,out_path):
 	file1.writelines(text)
 	file1.close()
 	return
-
-
 
 
 ## Tesseract OCR pass
@@ -75,12 +73,15 @@ out_path = '/home/kbari/git_repo/FinanceErdosProj/Extract_Data_Kash/'
 tesseract_one(file,out_path)
 
 
+
+### Main
+
 def main():
     path = 
-    pd
     out_path = 
-    tesseract_
+    pymupdf_pass(path,out_path)
+    out_path1 = 
+    tesseract_pass(out_path,out_path1)
 
 if __name__ == "__main__":
     main()
-???END
