@@ -44,3 +44,10 @@ def text_preprocess(text):
     nopunc = ''.join([i for i in nopunc if not i.isdigit()])
     nopunc =  [word.lower() for word in nopunc.split() if word not in stopwords.words('english')]
     return [stemmer.lemmatize(word) for word in nopunc]
+
+
+def main():
+    return
+
+if __name__ == "__main__":
+    main()

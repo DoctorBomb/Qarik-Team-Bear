@@ -70,18 +70,18 @@ def check(path,thresh=1000):
 
 file = '2019_july_2_922281564166445297_official-documents-amendment-to-the-loan-agreement-for-loan-8564-ga.pdf'
 out_path = '/home/kbari/git_repo/FinanceErdosProj/Extract_Data_Kash/'
-tesseract_one(file,out_path)
+#tesseract_one(file,out_path)
 
 
 
 ### Main
 
 def main():
-    path = 
-    out_path = 
-    pymupdf_pass(path,out_path)
-    out_path1 = 
-    tesseract_pass(out_path,out_path1)
+    #path = '/home/kbari/git_repo/FinanceErdosProj/Original_Data/' 
+    #out_path = '/home/kbari/git_repo/FinanceErdosProj/PyMuPdf_Text/'
+    #pymupdf_pass(path,out_path)
+    #out_path1 = '/home/kbari/git_repo/FinanceErdosProj/Tesseract_Text/'
+    #tesseract_pass(out_path,out_path1)
 
 if __name__ == "__main__":
     main()
