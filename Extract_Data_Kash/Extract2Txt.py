@@ -1,3 +1,4 @@
+??? from here until ???END lines may have been inserted/deleted
 #! /usr/bin/env python3
 
 import os
@@ -23,15 +24,23 @@ def pdfminer_pass():
 
 def pymupdf_pass(path,out_path):
     '''PyMyPdf first pass'''
+	for file in path:
+		pdfmupdf_one(file,out_path)
+	return
+
+def pymupdf_one(file,out_path):
 	doc = fitz.open(filename)
 	file1= open(out_path+os.path.splitext(os.path.basename(filename))[0]+".txt","w")
 	text = ''
 	for page in doc:
-    	text += page.get_text('text')
+		text += page.get_text('text')
 	file1.writelines(text)
 	file1.close()
 	return
- 
+
+
+
+
 ## Tesseract OCR pass
 def tesseract_pass(path,out_path):
     ''' Runs Tesseract OCR on list of pdfs '''
@@ -66,4 +75,12 @@ out_path = '/home/kbari/git_repo/FinanceErdosProj/Extract_Data_Kash/'
 tesseract_one(file,out_path)
 
 
+def main():
+    path = 
+    pd
+    out_path = 
+    tesseract_
 
+if __name__ == "__main__":
+    main()
+???END
