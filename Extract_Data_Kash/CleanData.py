@@ -26,7 +26,9 @@ def txt_to_df(path):
         with open(path+DIR[i]) as f:
             lines = f.readlines()
             data = '\n'.join(map(str,lines))
-            di = pd.DataFrame([data,len(data)],index=['raw_text','num_char'],columns=[DIR[i]]).T
+            print(loan_amount_preprocess(data))
+            print(country_preprocess(data))
+            di = pd.DataFrame([data,loan_amount_preprocess(data),country_preprocess(data),len(data)],index=['raw_text','loan_amount','country','num_char'],columns=[DIR[i]]).T
             raw_df_lst.append(di)
     #print(len(raw_df_lst))
     df_raw = pd.concat(raw_df_lst)
@@ -57,7 +59,13 @@ def loan_amount_preprocess(text):
 def country_preprocess(text):
     start = 'between'
     end = 'and'
-    return text.split(start)[1].split(end)[0].strip()
+    end1 = 'Dated'
+    t = text.split(start)[1].split(end)[0].strip()
+    s = text.split(end)[1].split(end1)[0].strip()
+    if t.startswith('INTERNATIONAL'):
+        return s
+    else:
+        return t
 
 
 def main():
