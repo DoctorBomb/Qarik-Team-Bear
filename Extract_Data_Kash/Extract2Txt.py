@@ -1,4 +1,3 @@
-??? from here until ???END lines may have been inserted/deleted
 #! /usr/bin/env python3
 
 import os
@@ -6,13 +5,7 @@ import pytesseract
 from pdf2image import convert_from_path 
 import fitz
 #import subprocess
-#import pandas as pd
 
-## Set path where pdf files are
-#path = "/home/kbari/Documents/Erdos/pdfminer_texts/"
-
-## Set output folder for text files
-#out_path = "/home/kbari/Documents/Erdos/Text_Data/"
 
 ## PDF Miner pass
 def pdfminer_pass():
@@ -24,29 +17,30 @@ def pdfminer_pass():
 ## PyMuPdf Pass
 def pymupdf_pass(path,out_path):
     '''PyMyPdf first pass'''
-	for file in path:
-		pdfmupdf_one(file,out_path)
-	return
+    for file in os.listdir(path):
+        #print(file)
+        pymupdf_one(path+file,out_path)
+    print(len(os.listdir(path)))
+    return
 
-def pymupdf_one(file,out_path):
-	doc = fitz.open(filename)
-	file1= open(out_path+os.path.splitext(os.path.basename(filename))[0]+".txt","w")
-	text = ''
-	for page in doc:
-		text += page.get_text('text')
-	file1.writelines(text)
-	file1.close()
-	return
+def pymupdf_one(filename,out_path):
+    doc = fitz.open(filename)
+    text = ''
+    for page in doc:
+        text += page.get_text('text')
+    file1 = open(out_path+os.path.splitext(os.path.basename(filename))[0]+".txt","w")	
+    file1.writelines(text)
+    file1.close()
+    return
 
 
 ## Tesseract OCR pass
-def tesseract_pass(path,out_path):
+def tesseract_pass(path,out_path,out_path1):
     ''' Runs Tesseract OCR on list of pdfs '''
-    #tesseract_parse = []
-    list_of_img_pdfs = check(path)
+    list_of_img_pdfs = check(out_path,500)
     for file in list_of_img_pdfs:
-        tesseract_one(file,out_path)
-    #df_tesser = pd.DataFrame(tesseract_parse,columns=[list_of_img_pdfs])
+        tesseract_one(path+os.path.splitext(file)[0]+".pdf",out_path1)
+        print(file)
     return
 
 def tesseract_one(file,out_path):
@@ -59,29 +53,44 @@ def tesseract_one(file,out_path):
     file1.close()
     return
 
-def check(path,thresh=1000):
-    ''' Determine which files are did not get extracted with pdfminer; Checks
+def check(path,thresh=500):
+    ''' Determine which files are did not get extracted with previous pass; Checks
     file size'''
     list_of_img_pdfs = []
-    for file in path:
-        if os.path.getsize(file) < 1000:
+    for file in os.listdir(path):
+        if os.path.getsize(path+file) < thresh:
             list_of_img_pdfs.append(file)
     return list_of_img_pdfs
 
-file = '2019_july_2_922281564166445297_official-documents-amendment-to-the-loan-agreement-for-loan-8564-ga.pdf'
-out_path = '/home/kbari/git_repo/FinanceErdosProj/Extract_Data_Kash/'
+#file = '2019_july_2_922281564166445297_official-documents-amendment-to-the-loan-agreement-for-loan-8564-ga.pdf'
+#out_path = '/home/kbari/git_repo/FinanceErdosProj/Extract_Data_Kash/'
 #tesseract_one(file,out_path)
 
+path = '/home/kbari/git_repo/FinanceErdosProj/Original_Data/'
+    ## Set path to output PyMuPdf text files
+out_path = '/home/kbari/git_repo/FinanceErdosProj/PyMuPdf_Text/'
+    ## Run PyMuPdf
+    #pymupdf_pass(path,out_path)
+    ## Output for Tesseract Files
+out_path1 = '/home/kbari/git_repo/FinanceErdosProj/Tesseract_Text/'
+    ## Run Tesseract on remaining Files
+list_of_img_pdfs = check(out_path)
+#tesseract_pass(out_path,out_path1)
 
 
 ### Main
-
 def main():
-    #path = '/home/kbari/git_repo/FinanceErdosProj/Original_Data/' 
-    #out_path = '/home/kbari/git_repo/FinanceErdosProj/PyMuPdf_Text/'
+    ## Set path where original Files are
+    path = '/home/kbari/git_repo/FinanceErdosProj/Original_Data/' 
+    ## Set path to output PyMuPdf text files
+    out_path = '/home/kbari/git_repo/FinanceErdosProj/PyMuPdf_Text/'
+    ## Run PyMuPdf; uncomment to run 
     #pymupdf_pass(path,out_path)
-    #out_path1 = '/home/kbari/git_repo/FinanceErdosProj/Tesseract_Text/'
-    #tesseract_pass(out_path,out_path1)
+    ## Output for Tesseract Files
+    out_path1 = '/home/kbari/git_repo/FinanceErdosProj/Tesseract_Text/'
+    ## Run Tesseract on remaining Files; uncomment to run
+    tesseract_pass(out_path,out_path1)
+    return
 
 if __name__ == "__main__":
     main()
