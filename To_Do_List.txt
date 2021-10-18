@@ -30,4 +30,4 @@ Possible other Analyses (Feel free to write your own suggestions!)
 
 6. Determine Impact of Loans on country economy over course of loan term
 
-7.
+7. Predict later years (GDP, CPI, different for each sector?)

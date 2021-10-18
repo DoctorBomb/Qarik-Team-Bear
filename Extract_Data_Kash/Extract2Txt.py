@@ -41,6 +41,8 @@ def tesseract_pass(path,out_path,out_path1):
     for file in list_of_img_pdfs:
         tesseract_one(path+os.path.splitext(file)[0]+".pdf",out_path1)
         print(file)
+        os.remove(out_path+file)
+        #print("Removed file",file)
     return
 
 def tesseract_one(file,out_path):
@@ -89,7 +91,7 @@ def main():
     ## Output for Tesseract Files
     out_path1 = '/home/kbari/git_repo/FinanceErdosProj/Tesseract_Text/'
     ## Run Tesseract on remaining Files; uncomment to run
-    tesseract_pass(out_path,out_path1)
+    tesseract_pass(path,out_path,out_path1)
     return
 
 if __name__ == "__main__":
