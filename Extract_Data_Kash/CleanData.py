@@ -67,7 +67,11 @@ def country_preprocess(text):
     else:
         return t
 
-
+def txt_to_csv(path,out_path):
+    '''Input path is path for all text files, output path is path to output
+    file'''
+    df_raw = txt_to_df(path)
+    return df_raw.to_csv(out_path,index=False)
 def main():
     return
 
