@@ -34,11 +34,7 @@ def txt_to_df(path):
             except:
                 l0 = None
             l1 = loan_amount_preprocess1(data)
-            try:
-                c = country_preprocess(data)
-            except:
-                c = None
-            di= pd.DataFrame([data,l1,l0,c,len(data)],index=['raw_text','re_loan_amount','loan_amount','country','num_char'],columns=[DIR[i]]).T
+            di= pd.DataFrame([data,l1,l0,c,len(data)],index=['raw_text','re_loan_amount','loan_amount','num_char'],columns=[DIR[i]]).T
             raw_df_lst.append(di)
     #print(len(raw_df_lst))
     df_raw = pd.concat(raw_df_lst)
