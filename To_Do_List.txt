@@ -1,16 +1,23 @@
 Bear Group: To Do List
 
 1. Extract whole dataset to text 
--- pdfminer vs pymupdf [Other libraries?]
--- pytesseract [Other libraries?]
+--pdfminer vs pymupdf [Other libraries?] [DONE]
+--pytesseract [Other libraries?] [DONE]
 
 2. Preprocess Data
---Extract Loan Amounts
---Extract Interest Rate/Lifetime of Loan
---Extract Country
---Extract Project Description
+-H-Extract Loan Amounts [KEVIN]
+-H-Extract Date [BINGJIN]
+-H-Extract Country [ATTILIO]
+-H-Extract Project Description [KASH]
+-M-Extract Interest Rate
+-M-Extract Lifetime/Tenure of Loan
+-M-Extract Deadline/Term
 --Extract any other information?
 
+External Information
+-M-GDP
+-L-Inflation
+-L-Currency Rates
 
 3. Clean Dataset
 -- Normalize Loan amounts (same currency ,account for inflation)
@@ -30,4 +37,4 @@ Possible other Analyses (Feel free to write your own suggestions!)
 
 6. Determine Impact of Loans on country economy over course of loan term
 
-7. Predict later years (GDP, CPI, different for each sector?)
+****7. Predict later years (GDP, CPI, different for each sector?)
