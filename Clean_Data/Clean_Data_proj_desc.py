@@ -30,12 +30,15 @@ def txt_to_df(path):
             data = '\n'.join(map(str,lines))
             print(DIR[i])
             p = proj_desc_preprocess(data)
-            di= pd.DataFrame([data,p,len(data)],index=['raw_text','proj_desc','num_char'],columns=[DIR[i]]).T
+            if p is not None:
+                l = len(p)
+            else:
+                l = 0
+            di= pd.DataFrame([data,p,int(l)],index=['raw_text','proj_desc','num_char'],columns=[DIR[i]]).T
             raw_df_lst.append(di)
     #print(len(raw_df_lst))
     df_raw = pd.concat(raw_df_lst)
     return df_raw
-
 
 
 ## Removes punctuation, stopwords, lemmatizes
@@ -49,14 +52,34 @@ def text_preprocess(text):
     nopunc =  [word.lower() for word in nopunc.split() if word not in stopwords.words('english')]
     return [stemmer.lemmatize(word) for word in nopunc]
     
-    
-    
+def remove_punc(text):
+    return
+
+## Grab Project Description   
 def proj_desc_preprocess(text):
     ''' Grab Project Description'''
-    start = 'SCHEDULE II' 
-    end =  'SCHEDULE III'
-    try:
-        return text.split(start)[1].split(end)[0]
-    except:
+    if len(re.findall('Project Description',text,re.IGNORECASE)) > 0:
+        start = 'Project Description'
+        end = 'SCHEDULE'
+        try:
+            return text.split(start)[1].split(end)[0]
+        except:
+            return None
+    elif len(re.findall('Description of the Project',text,re.IGNORECASE)) > 0:
+        start = 'Description of the Project'
+        end = 'SCHEDULE'
+        try:
+            return text.split(start)[1].split(end)[0]
+        except:
+            return None
+    elif len(re.findall('Program Actions',text,re.IGNORECASE)) > 0:
+        start = 'Program Actions'
+        end = 'Section II'
+        try:
+            return text.split(start)[1].split(end)[0]
+        except:
+            return None
+    else:
+        print('CASE 4')
         return None
 
