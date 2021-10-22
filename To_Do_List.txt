@@ -6,16 +6,16 @@ Bear Group: To Do List
 
 2. Preprocess Data
 -H-Extract Loan Amounts [KEVIN]
--H-Extract Date [BINGJIN]
+--Extract Date [DONE]
 -H-Extract Country [ATTILIO]
 -H-Extract Project Description [KASH]
 -M-Extract Interest Rate
 -M-Extract Lifetime/Tenure of Loan
--M-Extract Deadline/Term
+-M-Extract Amortization/Schedule
 --Extract any other information?
 
 External Information
--M-GDP
+-H-GDP
 -L-Inflation
 -L-Currency Rates
 
@@ -38,3 +38,7 @@ Possible other Analyses (Feel free to write your own suggestions!)
 6. Determine Impact of Loans on country economy over course of loan term
 
 ****7. Predict later years (GDP, CPI, different for each sector?)
+
+8. Richer vs Poorer countries
+
+9. Regression/Predictors within each sector (AFTER clustering by sector)
