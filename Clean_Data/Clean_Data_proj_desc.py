@@ -31,6 +31,7 @@ def txt_to_df(path):
             print(DIR[i])
             p = proj_desc_preprocess(data)
             if p is not None:
+                p = p.replace("\n","")
                 l = len(p)
             else:
                 l = 0
