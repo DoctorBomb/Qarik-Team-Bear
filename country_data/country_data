@@ -1,0 +1,39 @@
+import os
+import numpy as np
+import pandas as pd
+
+path = "/Users/attiliocastano/Documents/GitHub/FinanceErdosProj/country_data/"
+
+pdf_DF = pd.read_csv(os.path.join(path,'PyMuPdf_DF.csv'))
+tess_DF = pd.read_csv(os.path.join(path,'Tesseract_DF.csv'))
+countries = pd.read_csv(os.path.join(path,'countries.csv'))
+
+country_list = countries.Country.values.tolist()
+countries_low = [x.lower().strip() for x in country_list]
+
+
+import spacy
+from spacy.matcher import Matcher
+nlp = spacy.load("en_core_web_md")
+
+matcher = Matcher(nlp.vocab)
+
+for c in countries_low:
+    pattern = [{'LOWER': {'REGEX': x}} for x in c.split()]
+    matcher.add(c, [pattern])
+
+
+
+def pdf_countries_sample(sample):
+    for i in pdf_DF.sample(sample).index:
+        doc = nlp.make_doc(pdf_DF.iloc[i].raw_txt)
+        matches = matcher(doc)
+        relevant_countries = []
+        for match_id, start, end in matches:
+            string_id = nlp.vocab.strings[match_id]  # Get string representation
+            span = doc[start:end]  # The matched span
+            relevant_countries.append(string_id)
+            np_array_rel_countries = np.array(relevant_countries)
+        print(np.unique(np_array_rel_countries, return_counts = True))
+
+pdf_countries_sample(30)
