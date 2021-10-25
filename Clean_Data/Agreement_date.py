@@ -47,6 +47,7 @@ def listdir_nohidden(path):
 ## This function is to display the performance of extraction function 
 def count_errors(dic):
     count = 0
+
     for key in dic.keys():
         if dic[key][1] == 'Fail':
             count +=1

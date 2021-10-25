@@ -14,7 +14,7 @@ nltk.download('wordnet')
 #nltk.download()
 
 ## Path to text files
-path = "/home/kbari/git_repo/FinanceErdosProj/PyMuPdf_Text/"
+path = "/Users/bingjinliu/Desktop/Erdos Institute/project/Data_txt/"
 path1 = "/home/kbari/git_repo/FinanceErdosProj/Tesseract_Text/"
 
 ## Load from txt from files to a dataframe; Other information to include possibly?
@@ -30,13 +30,20 @@ def txt_to_df(path):
             data = '\n'.join(map(str,lines))
             print(DIR[i])
             try:
-                d = date_preprocess(data)
+                d = date_preprocess(DIR[i])
             except:
                 d = None
-            di= pd.DataFrame([data,d,len(data)],index=['raw_text','date','num_char'],columns=[DIR[i]]).T
+            
+            try:
+                s = sector_preprocess(DIR[i])
+            except:
+                s = None
+
+            di= pd.DataFrame([data,d,s,len(data)],index=['raw_text','date','sector','num_char'],columns=[DIR[i]]).T
             raw_df_lst.append(di)
     #print(len(raw_df_lst))
     df_raw = pd.concat(raw_df_lst)
+    print(df_raw[["sector",'date']])
     return df_raw
     
     
@@ -44,8 +51,14 @@ def txt_to_df(path):
     
 def date_preprocess(text):
     '''Grab Date'''
-    return
-    
+    date = re.search(r'(\d{4}_(january|february|march|april|may|june|july|august|september|october|november|december)_\d{1,2})_', text)
+    return date.group(1)
+
+def sector_preprocess(text):  
+    '''Grab sector information'''
+    sector= re.search(r'.*?--(\D*?)-(project|program|loan|credit){1}', text)
+    return sector.group(1)
+
     
 def txt_to_csv(path,out_path):
     '''Input path is path for all text files, output path is path to output
@@ -59,3 +72,5 @@ def txt_to_csv(path,out_path):
 
 #if __name__ == "__main__":
 #    main()
+
+txt_to_df(path)

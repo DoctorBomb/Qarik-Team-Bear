@@ -216,7 +216,7 @@ def extract_amortization_schedule_files(path):
     num_files = 0
     for file_name in files:
         num_files += 1
-        if (num_files >-1)  :
+        if (num_files >-1) and (num_files < 50) :
             file_path = os.path.join(path, file_name)
             #print(type(file_name))
             f = open(file_path,'r')
@@ -249,8 +249,8 @@ def count_errors(dic):
             count +=1
             #print(key)
             #print(dic[key][0])
-        # else:
-        #     print(dic[key][0])
+        else:
+            print(dic[key][0])
     return count 
 
 ############################################################################################################
