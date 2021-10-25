@@ -5,9 +5,9 @@ Bear Group: To Do List
 --pytesseract [Other libraries?] [DONE]
 
 2. Preprocess Data
--H-Extract Loan Amounts [KEVIN]
+-H-Extract Loan Amounts [KEVIN] > Let me know when ready so I can merge (-Kash)
 --Extract Date [DONE]
--H-Extract Country [ATTILIO]
+-H-Extract Country [ATTILIO] > Let me know when ready so I can merge (-Kash)
 -H-Extract Project Description [KASH]
 -M-Extract Interest Rate
 -M-Extract Lifetime/Tenure of Loan
@@ -15,7 +15,7 @@ Bear Group: To Do List
 --Extract any other information?
 
 External Information
--H-GDP
+-H-GDP [UPLOAD CSV FILE FROM LINK]
 -L-Inflation
 -L-Currency Rates
 
@@ -28,9 +28,10 @@ External Information
 
 4. Clustering Data/Visualization [I'd be happy to do this step as I have
    already started to work on it --Kash]
--- Word2Vec vs Doc2Vec
--- k-means, PCA, t-SNE, UMAP [Dimension reduction for clustering]
--- Regional Analysis perhaps? (similar to previous group)
+-- Word2Vec vs Doc2Vec [DONE]
+-L- k-means, PCA, t-SNE, UMAP [Dimension reduction for clustering]
+-H- DBCSan (PCA and Doc2vec) [KASH AND BINGJIN]
+-H- Country/region visualize [KEVIN AND ATTILIO]
 
 Possible other Analyses (Feel free to write your own suggestions!)
 5. Predict Loan Amount from other features
@@ -40,5 +41,7 @@ Possible other Analyses (Feel free to write your own suggestions!)
 ****7. Predict later years (GDP, CPI, different for each sector?)
 
 8. Richer vs Poorer countries
+--stability
+--freedom of speech/armed conflict
 
 9. Regression/Predictors within each sector (AFTER clustering by sector)
