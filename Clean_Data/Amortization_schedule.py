@@ -10,7 +10,7 @@ MONTH = ("January","February", "March","April", 'May', 'June', 'July', 'August',
 ## main function to extract amortization schedule
 ##input is a whole text of loan agreement, output is a list consisting of repayment date and amount
 def extract_amortization_schedule(text):
-
+    
     #possible starting index     
     a1 = text.find('Amortization Schedule')
     a2 = text.find('Date Payment Due')
@@ -44,8 +44,8 @@ def extract_amortization_schedule(text):
         flag = max(flags)
     
         ## pattern we are looking for
-        date = r'(.*?)(January|February|March|April|May|June|July|August|September|October|November|December)( *[ l\d]{1,2} *),? *(\d\d\d\d)?'
-        number = r'(.*?)(\d{1,3} ?([;,]{1} ?[CO\d]{3} ?)?([,;] ?[CO\d]{2,3}){1})\s+'
+        date = r'(.*?)(January|February|March|April|May|June|July|August|September|October|November|December)( *[ l\d]{1,2} *),? *([l\d]\d\d\d)?'
+        number = r'(.*?)(\d{1,3} ?([;,]{1} ?[CO\d]{3} ?)?([,;.] ?[lCO\d]{2,3}){1})[.\s]+'
         percentage =r'.*?(\d+(\.\d+)?%)\s+'
         
         date_result = date_clean(re.findall(date,search_txt))
@@ -59,7 +59,6 @@ def extract_amortization_schedule(text):
 
         #match the date and the amount information
         amtz_schedule = rmbegin(date_result,amount_result)
-
     return amtz_schedule
 
 ############################################################################################################
@@ -80,10 +79,10 @@ def str2num(amounts,flag):
     new_amounts =[]
     j = 0
     for s in amounts:
-        if (flag == -1) or j < len(amounts) - 1:
             j = j + 1
-            r1 = re.sub(r'[ ,;]','',s[1])
-            r = re.sub(r'[CO]','0',r1)
+            r1 = re.sub(r'[ ,;.]','',s[1])
+            r1 = re.sub(r'[CO]','0',r1)
+            r = re.sub(r'l','1',r1)
 
             ## here we need to manually change to an integer, because the existence of 04
             sum = 0
@@ -95,7 +94,9 @@ def str2num(amounts,flag):
 
             ## here we only record numbers greater than 2100 to get rid of year numbers
             if sum >= 2100:
-                new_amounts.append(sum)      
+                new_amounts.append(sum)  
+    if flag != -1:  
+                new_amounts.pop()  
     return new_amounts
 
 
@@ -105,6 +106,7 @@ def date_clean(dates):
     new_dates = []
     flag = False
     for i in range(len(dates)):
+        
         if re.search(r'Closing',dates[i][0]) or re.search(r'closing',dates[i][0]) or re.search(r'completed by',dates[i][0]):
             flag = False
             continue
@@ -114,7 +116,15 @@ def date_clean(dates):
         if re.search(r'and',dates[i][0]) and flag == True:
             flag = False
             continue
-        new_dates.append(dates[i])
+        
+        ## change the mispelling l to 1
+        other = dates[i][0]
+        month = dates[i][1]
+        day = re.sub(r'l','1',dates[i][2])
+        year = re.sub(r'l','1',dates[i][3])
+        new_date = (other,month,day,year)
+
+        new_dates.append(new_date)
     return new_dates
 
 ## This function is to decide use numbers or percentages
@@ -216,18 +226,23 @@ def extract_amortization_schedule_files(path):
     num_files = 0
     for file_name in files:
         num_files += 1
-        if (num_files >-1) and (num_files < 50) :
-            file_path = os.path.join(path, file_name)
-            #print(type(file_name))
-            f = open(file_path,'r')
-            txt = f.read()
-            r = extract_amortization_schedule(txt)
-            flag = 'Success'
-        
-            if any (m in r for m in error_message):
-                flag = 'Fail'
-            dic[file_name] = [r, flag]
-            f.close()
+        ## manuallt add all other cases:
+        if file_name == "1990_february_2_422441468292518842_conformed-copy--l3147--transmission-extension-and-reinforcement-project--loan-agreement.txt":
+            s = [['May 1/1995', 2950000], ['November 1/1995', 3065000], ['May 1/1996', 3185000], ['November 1/1996', 3310000], ['May 1/1997', 3435000], ['November 1/1997', 3570000], ['May 1/1998', 3705000], ['November 1/1998', 3850000], ['May 1/1999', 4000000], ['November 1/1999', 4155000], ['May 1/2000', 4325000], ['November 1/2000', 4480000], ['May 1/2001', 4655000], ['November 1/2001', 4835000], ['May 1/2002', 5025000], ['November 1/2002', 5215000], ['May 1/2003', 5420000], ['November 1/2003', 5630000], ['May 1/2004', 5845000], ['November 1/2004', 6075000], ['May 1/2005', 6310000], ['November 1/2005', 6550000], ['May 1/2006', 6805000], ['November 1/2006', 7070000], ['May 1/2007', 7345000], ['November 1/2007', 7625000], ['May 1/2008', 7920000], ['November 1/2008', 8230000], ['May 1/2009', 8545000], ['Novermber 1/2009',8880000]]
+            dic[file_name] = [s,'Success']        
+        else:    
+            if (num_files >=100) and (num_files < 200) :
+                file_path = os.path.join(path, file_name)
+                #print(type(file_name))
+                f = open(file_path,'r')
+                txt = f.read()
+                r = extract_amortization_schedule(txt)
+                flag = 'Success'
+            
+                if any (m in r for m in error_message):
+                    flag = 'Fail'
+                dic[file_name] = [r, flag]
+                f.close()
     print('There are %d files in total' %(num_files))
     return dic
 
@@ -247,16 +262,22 @@ def count_errors(dic):
     for key in dic.keys():
         if dic[key][1] == 'Fail':
             count +=1
-            #print(key)
-            #print(dic[key][0])
-        else:
+            print(key)
             print(dic[key][0])
+        #else:
+            #print(dic[key][0])
     return count 
 
 ############################################################################################################
 
-##Check the performance on all files
+#Check the performance on all files
 path1 = '/Users/bingjinliu/Desktop/Erdos Institute/project/github/FinanceErdosProj/Tesseract_Text'
 path2 = '/Users/bingjinliu/Desktop/Erdos Institute/project/github/FinanceErdosProj/PyMuPdf_Text'
 dic =  extract_amortization_schedule_files(path2)
 print(count_errors(dic))
+
+# path3 = '/Users/bingjinliu/Desktop/Erdos Institute/project/github/FinanceErdosProj/PyMuPdf_Text/1990_march_30_406771468338061081_conformed-copy--l3177--second-agricultural-extension-and-applied-research-project--loan-agreement.txt'
+# f = open(path3,'r')
+# txt = f.read()
+# s = extract_amortization_schedule(txt)
+# f.close()
