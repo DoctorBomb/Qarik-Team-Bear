@@ -41,7 +41,6 @@ def txt_to_df(path):
     df_raw = pd.concat(raw_df_lst)
     return df_raw
 
-
 ## Removes punctuation, stopwords, lemmatizes
 def text_preprocess(text):
     '''
@@ -53,8 +52,6 @@ def text_preprocess(text):
     nopunc =  [word.lower() for word in nopunc.split() if word not in stopwords.words('english')]
     return [stemmer.lemmatize(word) for word in nopunc]
     
-def remove_punc(text):
-    return
 
 ## Grab Project Description   
 def proj_desc_preprocess(text):
@@ -80,7 +77,26 @@ def proj_desc_preprocess(text):
             return text.split(start)[1].split(end)[0]
         except:
             return None
+    elif len(re.findall('Schedule 3',text,re.IGNORECASE)) > 0:
+        start = 'SCHEDULE 3'
+        #end = 'SCHEDULE 3'
+        try:
+            return text.split(start)[1]
+        except:
+            return None
+    elif len(re.findall('Schedule III',text,re.IGNORECASE)) > 0:
+        start = 'SCHEDULE III'
+        #end = 'SCHEDULE 3'
+        try:
+            return text.split(start)[1]
+        except:
+            return None
     else:
         print('CASE 4')
         return None
 
+
+
+df = txt_to_df(path)
+df1 = txt_to_df(path1)
+dF = pd.concat([df,df1])
