@@ -26,6 +26,7 @@ for c in countries_low:
     pattern = [{'LOWER': {'REGEX': x}} for x in c.split()]
     matcher.add(c, [pattern])
 
+
 def insert_list_countries(data):
     for i in data.index:
         print(i)
