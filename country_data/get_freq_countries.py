@@ -73,9 +73,10 @@ def countries_string_to_list(data_instance):
     return [country_names, country_times]
 
 
-def frequency_of_countries(data):
+
+def total_frequency_of_countries(data):
     '''
-    data is in DF_tess ot DF_pdf
+    data is in DF_tess or in DF_pdf
     outputs dic with the frecuency that each country has been mentioned among
     all documents
 
@@ -92,6 +93,8 @@ def frequency_of_countries(data):
     return dic
 
 
+
+
 '''
 T = frequency_of_countries(DF_tess)
 print(T['united states'])
@@ -102,10 +105,10 @@ print(P['united states'])
 #Returns 2778 out of 2806 files
 '''
 
-tess_countries_dic = frequency_of_countries(DF_tess)
-pdf_countries_dic = frequency_of_countries(DF_pdf)
+tess_total_countries_dic = total_frequency_of_countries(DF_tess)
+pdf_total_countries_dic = total_frequency_of_countries(DF_pdf)
 
-total_dic = {x: tess_countries_dic[x] + pdf_countries_dic[x] for x in countries_low}
+total_dic = {x: tess_total_countries_dic[x] + pdf_total_countries_dic[x] for x in countries_low}
 
 
 '''
