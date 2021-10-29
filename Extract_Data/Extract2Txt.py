@@ -4,26 +4,30 @@ import os
 import pytesseract
 from pdf2image import convert_from_path 
 import fitz
-#import subprocess
 
 
-## PDF Miner pass
+## PDF Miner runs on all files. Check shell script to modify directories
 def pdfminer_pass():
-    ''' PDF Miner.Six first pass; Calls bash script; requires it be executable (chmod +x pdfmine.sh)'''
+    '''
+    PDF Miner.Six first pass; Calls bash script; requires it be executable (chmod +x pdfmine.sh)
+    '''
     os.system('./pdfmine.sh')
-    #subprocess.call(['sh',path+'pdfmine.sh'])
     return
 
-## PyMuPdf Pass
+## PyMuPdf to convert pdf files to txt files
 def pymupdf_pass(path,out_path):
-    '''PyMyPdf first pass'''
+    '''
+    Runs PyMuPdf to convert all pdfs to txt files
+    '''
     for file in os.listdir(path):
-        #print(file)
         pymupdf_one(path+file,out_path)
     print(len(os.listdir(path)))
     return
 
 def pymupdf_one(filename,out_path):
+    '''
+    Runs PyMuPdf to conver one pdf to a txt file
+    '''
     doc = fitz.open(filename)
     text = ''
     for page in doc:
@@ -34,18 +38,23 @@ def pymupdf_one(filename,out_path):
     return
 
 
-## Tesseract OCR pass
+## Tesseract OCR to convert pdfs that are scanned images to txt files
 def tesseract_pass(path,out_path,out_path1):
-    ''' Runs Tesseract OCR on list of pdfs '''
+    ''' 
+    Runs Tesseract OCR on all pdfs that did not get parsed by PyMuPdf.
+    (Determined by check function))
+    '''
     list_of_img_pdfs = check(out_path,500)
     for file in list_of_img_pdfs:
         tesseract_one(path+os.path.splitext(file)[0]+".pdf",out_path1)
         print(file)
         os.remove(out_path+file)
-        #print("Removed file",file)
     return
 
 def tesseract_one(file,out_path):
+    '''
+    Runs Tesseract OCR on one pdf img file
+    '''
     out = convert_from_path(file,500)
     raw_text = ''
     for o in out:
@@ -56,28 +65,16 @@ def tesseract_one(file,out_path):
     return
 
 def check(path,thresh=500):
-    ''' Determine which files are did not get extracted with previous pass; Checks
-    file size'''
+    '''
+    Determine which files are did not get extracted by PyMuPdf; Checks
+    file size
+    '''
     list_of_img_pdfs = []
     for file in os.listdir(path):
         if os.path.getsize(path+file) < thresh:
             list_of_img_pdfs.append(file)
     return list_of_img_pdfs
 
-#file = '2019_july_2_922281564166445297_official-documents-amendment-to-the-loan-agreement-for-loan-8564-ga.pdf'
-#out_path = '/home/kbari/git_repo/FinanceErdosProj/Extract_Data_Kash/'
-#tesseract_one(file,out_path)
-
-path = '/home/kbari/git_repo/FinanceErdosProj/Original_Data/'
-    ## Set path to output PyMuPdf text files
-out_path = '/home/kbari/git_repo/FinanceErdosProj/PyMuPdf_Text/'
-    ## Run PyMuPdf
-    #pymupdf_pass(path,out_path)
-    ## Output for Tesseract Files
-out_path1 = '/home/kbari/git_repo/FinanceErdosProj/Tesseract_Text/'
-    ## Run Tesseract on remaining Files
-list_of_img_pdfs = check(out_path)
-#tesseract_pass(out_path,out_path1)
 
 
 ### Main
