@@ -6,16 +6,16 @@ import numpy as np
 import pandas as pd
 import string
 import re
-import nltk
-from nltk.corpus import stopwords
-from nltk.stem import WordNetLemmatizer
-nltk.download('stopwords')
-nltk.download('wordnet')
+# import nltk
+# from nltk.corpus import stopwords
+# from nltk.stem import WordNetLemmatizer
+# nltk.download('stopwords')
+# nltk.download('wordnet')
 #nltk.download()
 
 ## Path to text files
-path = "/home/kbari/git_repo/FinanceErdosProj/PyMuPdf_Text/"
-path1 = "/home/kbari/git_repo/FinanceErdosProj/Tesseract_Text/"
+path = "/Users/bingjinliu/Desktop/Erdos Institute/project/github/FinanceErdosProj/PyMuPdf_Text/"
+path1 = "/Users/bingjinliu/Desktop/Erdos Institute/project/github/FinanceErdosProj/Tesseract_Text/"
 
 ## Load from txt from files to a dataframe; Other information to include possibly?
 
@@ -28,14 +28,15 @@ def txt_to_df(path):
         with open(path+DIR[i],encoding = "ISO-8859-1") as f:
             lines = f.readlines()
             data = '\n'.join(map(str,lines))
-            print(DIR[i])
+            #print(DIR[i])
             p = proj_desc_preprocess(data)
+            
             if p is not None:
                 p = p.replace("\n","")
                 l = len(p)
             else:
                 l = 0
-            di= pd.DataFrame([data,p,int(l)],index=['raw_text','proj_desc','num_char'],columns=[DIR[i]]).T
+            di= pd.DataFrame([p,int(l)],index=['proj_desc','num_char'],columns=[DIR[i]]).T
             raw_df_lst.append(di)
     #print(len(raw_df_lst))
     df_raw = pd.concat(raw_df_lst)
@@ -91,8 +92,8 @@ def proj_desc_preprocess(text):
             return text.split(start)[1]
         except:
             return None
-    else:
-        print('CASE 4')
+    # else:
+    #     print('CASE 4')
         return None
 
 
@@ -100,3 +101,7 @@ def proj_desc_preprocess(text):
 df = txt_to_df(path)
 df1 = txt_to_df(path1)
 dF = pd.concat([df,df1])
+
+print(dF.head())
+
+# dF.to_csv("/Users/bingjinliu/Desktop/Erdos Institute/project/playground/pro_desc.csv")
