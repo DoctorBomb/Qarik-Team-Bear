@@ -1,0 +1,12 @@
+\babel@toc {english}{}
+\beamer@sectionintoc {1}{Text Extraction}{3}{0}{1}
+\beamer@subsectionintoc {1}{1}{PyMuPDF and pyTesseract}{5}{0}{1}
+\beamer@sectionintoc {2}{Data Extraction}{8}{0}{2}
+\beamer@subsectionintoc {2}{1}{Data from PDFs}{8}{0}{2}
+\beamer@subsectionintoc {2}{2}{Data from other sources}{10}{0}{2}
+\beamer@sectionintoc {3}{Key Performance Indicators}{12}{0}{3}
+\beamer@sectionintoc {4}{Data Analysis}{13}{0}{4}
+\beamer@subsectionintoc {4}{1}{Visualization}{13}{0}{4}
+\beamer@subsectionintoc {4}{2}{Clustering}{14}{0}{4}
+\beamer@subsectionintoc {4}{3}{Analysis of Wealth and Loan information}{15}{0}{4}
+\beamer@sectionintoc {5}{Conclusions and Future Work}{16}{0}{5}
