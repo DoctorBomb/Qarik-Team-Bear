@@ -5,19 +5,19 @@ Bear Group: To Do List
 --pytesseract [Other libraries?] [DONE]
 
 2. Preprocess Data
--H-Extract Loan Amounts [KEVIN] > Let me know when ready so I can merge (-Kash)
+--Extract Loan Amounts [KEVIN] > Let me know when ready so I can merge (-Kash)
 --Extract Date [DONE]
--H-Extract Country [ATTILIO] > Let me know when ready so I can merge (-Kash)
--H-Extract Project Description [KASH]
+--Extract Country [ATTILIO] > Let me know when ready so I can merge (-Kash)
+--Extract Project Description [KASH]
 -M-Extract Interest Rate
 -M-Extract Lifetime/Tenure of Loan
 -M-Extract Amortization/Schedule
 --Extract any other information?
 
 External Information
--H-GDP [UPLOAD CSV FILE FROM LINK]
+--GDP [UPLOAD CSV FILE FROM LINK]
 -L-Inflation
--L-Currency Rates
+--Currency Rates 
 --Determine "stability of country"
 
 3. Clean Dataset
@@ -33,6 +33,22 @@ External Information
 -L- k-means, PCA, t-SNE, UMAP [Dimension reduction for clustering]
 -H- DBCSan (PCA and Doc2vec) [KASH AND BINGJIN]
 -H- Country/region visualize [KEVIN AND ATTILIO]
+--Pre-trained GLoVe (k-means) clustering (BINJIN)
+--LDA (KASH) --> Check manually (20 samples)
+--push project name main
+
+
+
+5. GDP analysis (attilio)
+-- Got Loan model
+
+
+6. Regression? Target-Loan Amount?
+
+7. Visualization Branch
+--Kevin saved us with Tableau!
+
+
 
 Possible other Analyses (Feel free to write your own suggestions!)
 5. Predict Loan Amount from other features
@@ -46,5 +62,6 @@ Possible other Analyses (Feel free to write your own suggestions!)
 --freedom of speech/armed conflict
 
 9. Regression/Predictors within each sector (AFTER clustering by sector)
+
 
 10. Compare sector with loan term (how long)
