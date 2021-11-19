@@ -17,7 +17,7 @@ Bear Group: To Do List
 External Information
 --GDP [UPLOAD CSV FILE FROM LINK]
 -L-Inflation
---Currency Rates 
+-L-Currency Rates
 --Determine "stability of country"
 
 3. Clean Dataset
@@ -62,6 +62,5 @@ Possible other Analyses (Feel free to write your own suggestions!)
 --freedom of speech/armed conflict
 
 9. Regression/Predictors within each sector (AFTER clustering by sector)
-
 
 10. Compare sector with loan term (how long)
