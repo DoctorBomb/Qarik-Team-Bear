@@ -13,10 +13,10 @@ A list of technologies used within the project:
 * [Python](https://www.python.org/): Version -- 
 * [PyMuPDF](https://pdfminersix.readthedocs.io/en/latest/): Version -- 
 * [Tesseract OCR](https://pypi.org/project/pytesseract/): Version --
-* [Tableau] (https://www.tableau.com/)
-* [Gensim] (https://radimrehurek.com/gensim/)
-* [scikit-learn] (https://scikit-learn.org/stable/)
-* [GLoVe] (https://pypi.org/project/glove_python/)
+* [Tableau](https://www.tableau.com/)
+* [Gensim](https://radimrehurek.com/gensim/)
+* [scikit-learn](https://scikit-learn.org/stable/)
+* [GLoVe](https://pypi.org/project/glove_python/)
 ## Contents
 ***
 * Extract_Data: Folder Contains script to extract text from pdf files. Output
