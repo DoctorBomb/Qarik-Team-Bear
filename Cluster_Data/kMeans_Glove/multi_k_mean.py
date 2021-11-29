@@ -2,6 +2,7 @@ from sklearn.cluster import KMeans
 import os
 import pandas as pd
 import numpy as np
+from sklearn.metrics import silhouette_score
 
 ## gather data
 num_features = 300
@@ -20,8 +21,10 @@ doc_size = 2940
 X = np.concatenate((doc_X,sec_X), axis = 0)
 
 
+
 def freq_vec(num_trails):
     ## rows are index of documents, the first 11 columns are index of sectors, and the last column means the doc is not in any section
+    scores = []
     freq = np.zeros((doc_size, 12))
     for i in range(num_trails):
         kmean = KMeans(n_clusters=11, max_iter = 10000)
@@ -30,6 +33,8 @@ def freq_vec(num_trails):
         # print(doc_y[0])
         sec_y = y[doc_size:]
         # print(sec_y)
+        score = silhouette_score(X[0:doc_size],doc_y)
+        scores.append(score)
         dic = {}
         for j in range(11):
             indx = list(np.where(sec_y == j)[0])
@@ -42,12 +47,14 @@ def freq_vec(num_trails):
             for s in range(len(sec)):
                 freq[k,sec[s]] += 1/len(sec)
     freq = freq/num_trails
-    return freq
+
+    return freq,scores
             
-freq = freq_vec(500)
+freq, scores = freq_vec(500)
 sector_names.append('not_classified')
 sector_names.insert(0,'file_name')
-
+average_score = sum(scores)/len(scores)
+print("The average silhouette score is ", average_score)
 vec = np.concatenate((file_names,freq),axis = 1)
 freq_df = pd.DataFrame(vec, columns = sector_names)
 # print(freq_df.iloc[0,1:13])
