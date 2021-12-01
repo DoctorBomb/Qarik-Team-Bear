@@ -3,7 +3,6 @@
 2. [Technologies](#technologies)
 3. [Contents](#contents)
 4. [Collaboration](#collaboration)
-5. [FAQs](#faqs)
 ## General Info
 ***
 Qarik Corporate Project for the Erdos Institute
