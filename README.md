@@ -9,10 +9,11 @@ Qarik Corporate Project for the Erdos Institute
 ## Technologies
 ***
 A list of technologies used within the project:
-* [Python3](https://www.python.org/): 
+* [Python3](https://www.python.org/):
   * [PyMuPDF](https://pdfminersix.readthedocs.io/en/latest/)
   * [Tesseract OCR](https://pypi.org/project/pytesseract/)
   * [NLTK](https://www.nltk.org/)
+  * [spaCy](https://spacy.io)
   * [Gensim](https://radimrehurek.com/gensim/)
   * [scikit-learn](https://scikit-learn.org/stable/)
   * [GLoVe](https://pypi.org/project/glove_python/)
@@ -20,16 +21,16 @@ A list of technologies used within the project:
 ## Contents
 ***
 #### Presentation Folder
-* Technical_Summary.ipynb provides technical overview as well as some visualizations 
+* Technical_Summary.ipynb provides technical overview as well as some visualizations
 of important results. Refer to this notebook to also have links to specific
 folders.
 * Executive_Summary.pdf provides summarized insights for stakeholders and
   addresses important KPIs.
 * Team_Bear_Slides has slides for our 5 minute presentation for the Erdos
-  Institute 
+  Institute
 #### Extract_Data Folder
 * Folder Contains script to extract text from pdf files. Has code to try and
-  extract text from all pdfs. Can use packages PyMuPDF and pyTesseract. 
+  extract text from all pdfs. Can use packages PyMuPDF and pyTesseract.
 Additionally has code to use PDFMiner.six, but is commented out as it did not
 perform as well as other packages. PyMuPDF and PDFMiner.six work on native
 PDFs. For scanned PDFs, we use pyTesseract, which is OCR software (longer run
@@ -43,7 +44,7 @@ time to extract using OCR).
   project description, project name and some preprocessing.
 #### Cluster_Data
 * Folder contains two folders for two different models for
-  clustering the loan agreements by the project description and project name. 
+  clustering the loan agreements by the project description and project name.
   *  Latent Dirchlet Allocation model
   *  k-means clustering model with the GLoVe model
 #### gdp_analysis
