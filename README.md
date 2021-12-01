@@ -10,14 +10,14 @@ Qarik Corporate Project for the Erdos Institute
 ## Technologies
 ***
 A list of technologies used within the project:
-* [Python](https://www.python.org/): Version -- 
+* [Python3](https://www.python.org/): 
   * [PyMuPDF](https://pdfminersix.readthedocs.io/en/latest/)
   * [Tesseract OCR](https://pypi.org/project/pytesseract/)
   * [NLTK](https://www.nltk.org/)
   * [Gensim](https://radimrehurek.com/gensim/)
   * [scikit-learn](https://scikit-learn.org/stable/)
   * [GLoVe](https://pypi.org/project/glove_python/)
-* [Tableau](https://www.tableau.com/): Version --
+* [Tableau](https://www.tableau.com/)
 ## Contents
 ***
 #### Presentation Folder
