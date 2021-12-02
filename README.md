@@ -20,9 +20,11 @@ A list of technologies used within the project:
 * [Tableau](https://www.tableau.com/)
 ## Contents
 ***
+#### Technical Summary.ipynb
+* This notebook provides technical overview as well as some visualizations
+of important results. Anyone interested in the details of the project, should view this file first as it explains and links to relevant details/files of the project. (Link: [Technical Summary](https://github.com/DoctorBomb/Qarik-Team-Bear/blob/main/Technical_Summary.ipynb))
+* img Folder contains image files used in Technical Summary.
 #### Presentation Folder
-* Technical_Summary.ipynb provides technical overview as well as some visualizations
-of important results. Anyone interested in the details of the project, should view this file first as it explains and links to relevant details/files of the project. (Link: [Technical Summary](https://github.com/DoctorBomb/Qarik-Team-Bear/blob/main/Presentation/Technical_Summary.ipynb))
 * Executive_Summary.pdf provides summarized insights for stakeholders and
   addresses important KPIs.
 * Team_Bear_Slides has slides for our 5 minute presentation for the Erdos
